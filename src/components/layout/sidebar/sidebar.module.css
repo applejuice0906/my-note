@@ -1,0 +1,61 @@
+.sidebar {
+  position: relative;
+  z-index: 99;
+  background: rgb(247, 246, 243);
+  color: rgba(25, 23, 17, 0.6);
+  width: 24rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-top: 3rem;
+  transition: all 0.2s;
+}
+
+.dark {
+  background: rgb(44, 50, 58);
+  color: rgb(118, 131, 144);
+}
+
+.themeSwitch {
+  align-self: center;
+  width: 6.2rem;
+  height: 3rem;
+  padding: 0 1px;
+  display: flex;
+  border-radius: 1rem;
+  background: rgb(197, 187, 187);
+  border: 1px solid rgba(122, 107, 107, 0.699);
+  position: relative;
+  cursor: pointer;
+}
+
+.button {
+  position: absolute;
+  top: -1px;
+  left: 0;
+  height: 2.92rem;
+  width: 2.92rem;
+  border-radius: 50%;
+  background: white;
+  z-index: 300;
+  border: 0.8px solid rgb(78, 72, 72);
+  transition: all 0.2s;
+}
+
+.dark .button {
+  transform: translateX(105%);
+}
+
+.icon {
+  display: block;
+  width: 3rem;
+}
+
+.footer {
+  margin: auto 0 1.4rem;
+  text-align: center;
+}
+
+.copyright {
+  font-size: 1.05rem;
+}

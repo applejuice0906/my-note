@@ -1,0 +1,32 @@
+.header {
+  display: flex;
+  position: relative;
+  align-items: center;
+  height: 5rem;
+  width: 100%;
+}
+
+.headerContent {
+  padding-top: 2rem;
+  padding-right: 4rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 9;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.icon {
+  height: 80%;
+  width: 2.3rem;
+  margin: 0 1rem;
+}
+
+.icon:hover {
+  transform: scale(1.07);
+  cursor: pointer;
+}

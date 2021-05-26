@@ -1,24 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from 'react';
+import Content from './components/layout/content';
+import Sidebar from './components/layout/sidebar';
 
 function App() {
+  const [dark, setDark] = useState(false);
+
+  useEffect(() => {
+    // get the theme from local storage
+    const data = JSON.parse(localStorage.getItem('dark'));
+    if (data) setDark(true);
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main>
+      <div className={`container ${dark ? 'dark' : ''}`}>
+        <Sidebar dark={dark} setDark={setDark} />
+        <Content dark={dark} />
+      </div>
+    </main>
   );
 }
 
