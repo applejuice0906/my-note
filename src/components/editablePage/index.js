@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
+import { calcUniqueID, setCaretToEnd } from '../../helpers';
+import { usePrevious } from '../../hooks';
 import EditableBlock from '../editableBlock';
-import { calcUniqueID } from '../../helpers';
+
 import styles from './styles.module.css';
 
 const EditablePage = () => {
-  const initialBlock = { id: calcUniqueID(), content: '', tag: 'p' };
+  const initialBlock = { id: calcUniqueID(), content: '', tag: 'h1' };
   const [page, setPage] = useState({ blocks: [initialBlock] });
   const [currentBlockId, setCurrentBlockId] = useState(null);
-
-  useEffect(() => {}, [page, currentBlockId]);
 
   const updatePageData = (currentBlock) => {
     const newBlocks = page.blocks.map((block) => {
@@ -20,7 +20,7 @@ const EditablePage = () => {
     // Update the document in FireStore Database
   };
 
-  const addNewBlock = (currentBlock, currentBlockRef) => {
+  const addNewBlock = (currentBlock) => {
     const newBlock = { id: calcUniqueID(), content: '', tag: 'p' };
     const currentIndex = page.blocks
       .map((block) => block.id)
@@ -34,7 +34,6 @@ const EditablePage = () => {
 
     // Insert a new block right after the current block
     newBlocks.splice(currentIndex + 1, 0, newBlock);
-
     setPage({ ...page, blocks: newBlocks });
 
     // Update the document in FireStore Database
@@ -52,7 +51,7 @@ const EditablePage = () => {
   return (
     <div className={styles.container}>
       <div className={styles.content}>
-        {page.blocks.map((block) => {
+        {page.blocks.map((block, index) => {
           return (
             <EditableBlock
               key={block.id}
@@ -60,7 +59,7 @@ const EditablePage = () => {
               updatePageData={updatePageData}
               addNewBlock={addNewBlock}
               deleteBlock={deleteBlock}
-              setCurrentBlockId={setCurrentBlockId}
+              lineNum={index}
             />
           );
         })}
