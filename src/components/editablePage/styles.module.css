@@ -1,0 +1,14 @@
+.container {
+  height: 100%;
+  max-width: 100%;
+  padding: 9.6rem 10vw 30vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: auto;
+}
+
+.content {
+  width: 100%;
+  max-width: 73rem;
+}

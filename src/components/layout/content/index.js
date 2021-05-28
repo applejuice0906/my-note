@@ -1,10 +1,10 @@
 import Header from '../header';
 import EditablePage from '../../editablePage';
-import classes from './content.module.css';
+import styles from './styles.module.css';
 
 const Content = ({ dark }) => {
   return (
-    <section className={classes.content}>
+    <section className={styles.content}>
       <Header dark={dark} />
       <EditablePage />
     </section>

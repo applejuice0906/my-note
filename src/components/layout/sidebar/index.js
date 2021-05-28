@@ -1,4 +1,4 @@
-import classes from './sidebar.module.css';
+import styles from './styles.module.css';
 import sun from '../../../assets/sunny.svg';
 import moon from '../../../assets/night.svg';
 
@@ -10,16 +10,17 @@ const Sidebar = ({ dark, setDark }) => {
   };
 
   return (
-    <div className={`${classes.sidebar} ${dark ? classes.dark : ''}`}>
-      <div onClick={handleThemeSwitch} className={classes.themeSwitch}>
-        <span className={classes.button}></span>
-        <img src={sun} alt="sunny icon" className={classes.icon} />
-        <img src={moon} alt="night icon" className={classes.icon} />
+    <div className={styles.container}>
+      <div className={`${styles.sidebar} ${dark ? styles.dark : ''}`}>
+        <div onClick={handleThemeSwitch} className={styles.themeSwitch}>
+          <span className={styles.button}></span>
+          <img src={sun} alt="sunny icon" className={styles.icon} />
+          <img src={moon} alt="night icon" className={styles.icon} />
+        </div>
+        <footer className={styles.footer}>
+          <p className={styles.copyright}>Copyright &copy; 2021 Note App</p>
+        </footer>
       </div>
-      <h2>TEXT</h2>
-      <footer className={classes.footer}>
-        <p className={classes.copyright}>Copyright &copy; 2021 Note App</p>
-      </footer>
     </div>
   );
 };

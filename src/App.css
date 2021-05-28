@@ -17,19 +17,58 @@ html {
   box-sizing: border-box;
 }
 
+@media only screen and (max-width: 770px) {
+  html {
+    font-size: 56.2%;
+  }
+}
+
 body {
   font-family: 'Roboto', sans-serif;
+  line-height: 1.5;
   font-size: 1.6rem;
 }
 
+h1 {
+  font-size: 3rem;
+  margin-bottom: 1.3rem;
+}
+
+h2 {
+  font-size: 2.5rem;
+  margin-bottom: 0.63rem;
+}
+
+h3 {
+  font-size: 1.92rem;
+  font-weight: 700;
+  margin-bottom: 0.36rem;
+}
+
+p {
+  font-size: 1.6rem;
+  margin-bottom: 0.27rem;
+}
+
+a:link,
+a:visited {
+  color: rgb(70, 105, 211);
+}
+
+h1.pageTitle {
+  font-size: 3.9rem;
+  margin-bottom: 2rem;
+}
+
 .container {
+  height: 100vh;
   display: flex;
   background: white;
   color: rgb(55, 53, 47);
-  transition: all 0.2s;
+  transition: background-color 0.2s, color 0.2s;
 }
 
 .dark.container {
-  background: rgb(60, 67, 77);
+  background-color: rgb(60, 67, 77);
   color: rgb(240, 240, 240);
 }
