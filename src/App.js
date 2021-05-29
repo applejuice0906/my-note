@@ -3,9 +3,11 @@ import { ThemeContext } from './context';
 
 import Content from './components/layout/content';
 import Sidebar from './components/layout/sidebar';
+import { ReactComponent as Icon } from './assets/menu.svg';
 
 function App() {
   const [dark, setDark] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     // get the theme from local storage
@@ -23,9 +25,12 @@ function App() {
 
   return (
     <ThemeContext.Provider value={themeValue}>
-      <main>
-        <div className={`container ${dark ? 'dark' : ''}`}>
-          <Sidebar />
+      <main className={dark ? 'dark' : ''}>
+        {!sidebarOpen ? (
+          <Icon className="icon" onClick={() => setSidebarOpen(true)} />
+        ) : null}
+        <div className="container">
+          <Sidebar sidebarState={{ sidebarOpen, setSidebarOpen }} />
           <Content />
         </div>
       </main>

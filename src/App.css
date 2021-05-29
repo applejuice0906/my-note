@@ -17,9 +17,9 @@ html {
   box-sizing: border-box;
 }
 
-@media only screen and (max-width: 770px) {
+@media only screen and (max-width: 780px) {
   html {
-    font-size: 56.2%;
+    font-size: 56.25%;
   }
 }
 
@@ -68,7 +68,28 @@ h1.pageTitle {
   transition: background-color 0.2s, color 0.2s;
 }
 
-.dark.container {
+.dark .container {
   background-color: rgb(60, 67, 77);
   color: rgb(240, 240, 240);
+}
+
+.icon {
+  height: 2.65rem;
+  width: 2.65rem;
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  fill: rgb(55, 53, 47);
+  display: none;
+  z-index: 12;
+}
+
+.dark .icon {
+  fill: rgb(240, 240, 240);
+}
+
+@media only screen and (max-width: 880px) {
+  .icon {
+    display: block;
+  }
 }

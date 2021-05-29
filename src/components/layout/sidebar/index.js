@@ -1,11 +1,26 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import styles from './styles.module.css';
 import sun from '../../../assets/sunny.svg';
 import moon from '../../../assets/night.svg';
 import { ThemeContext } from '../../../context';
 
-const Sidebar = () => {
+const Sidebar = ({ sidebarState }) => {
   const { dark, setDark } = useContext(ThemeContext);
+  const { sidebarOpen, setSidebarOpen } = sidebarState;
+
+  const sidebarRef = useRef(null);
+
+  useEffect(() => {
+    if (sidebarOpen) {
+      const listener = (e) => {
+        if (sidebarRef.current.contains(e.target)) return;
+        setSidebarOpen(false);
+      };
+
+      document.addEventListener('click', listener);
+      return () => document.removeEventListener('click', listener);
+    }
+  }, [sidebarOpen, setSidebarOpen]);
 
   const handleThemeSwitch = () => {
     // store the theme to local storage
@@ -14,8 +29,17 @@ const Sidebar = () => {
   };
 
   return (
-    <div className={styles.container}>
-      <div className={`${styles.sidebar} ${dark ? styles.dark : ''}`}>
+    <div
+      className={
+        sidebarOpen
+          ? [styles.container, styles.active].join(' ')
+          : styles.container
+      }
+    >
+      <div
+        ref={sidebarRef}
+        className={`${styles.sidebar} ${dark ? styles.dark : ''}`}
+      >
         <div onClick={handleThemeSwitch} className={styles.themeSwitch}>
           <span className={styles.button}></span>
           <img src={sun} alt="sunny icon" className={styles.icon} />

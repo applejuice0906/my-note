@@ -6,6 +6,7 @@
   flex-direction: column;
   align-items: center;
   overflow: auto;
+  overflow-x: hidden;
 }
 
 .content {
