@@ -4,10 +4,18 @@ import EditableBlock from '../editableBlock';
 
 import styles from './styles.module.css';
 
+// Each page contains an array of blocks/block
+
 const EditablePage = () => {
+  // When a new page is added, it sets a initial block for the page
   const initialBlock = { id: calcUniqueID(), content: '', tag: 'h1' };
+
   const [blocks, setBlocks] = useState([initialBlock]);
   const [currentBlockId, setCurrentBlockId] = useState(null);
+
+  useEffect(() => {
+    // Update the document in FireStore Database
+  }, [blocks]);
 
   useEffect(() => {
     // get the next block position by calculating the current block position(index + 1) + 1
@@ -20,13 +28,12 @@ const EditablePage = () => {
   }, [currentBlockId, blocks]);
 
   const updatePageData = (currentBlock) => {
+    setCurrentBlockId(currentBlock.id);
     const newBlocks = blocks.map((block) => {
       if (block.id === currentBlock.id) return currentBlock;
       return block;
     });
     setBlocks(newBlocks);
-
-    // Update the document in FireStore Database
   };
 
   const addNewBlock = (currentBlock) => {
@@ -45,13 +52,11 @@ const EditablePage = () => {
     // Insert a new block right after the current block
     newBlocks.splice(currentIndex + 1, 0, newBlock);
     setBlocks(newBlocks);
-
-    // Update the document in FireStore Database
   };
 
-  const deleteBlock = (currentBlock) => {
+  const deleteBlock = (currentBlockId) => {
     if (blocks.length === 1) return;
-    const newBlocks = blocks.filter((block) => block.id !== currentBlock.id);
+    const newBlocks = blocks.filter((block) => block.id !== currentBlockId);
     setBlocks(newBlocks);
   };
 

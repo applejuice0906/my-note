@@ -1,10 +1,14 @@
 import { useCallback, useEffect, useRef, useState, useContext } from 'react';
 import { ThemeContext } from '../../context';
-import { setCaretToEnd, getCaretCoordinates } from '../../helpers';
+import { getCaretCoordinates } from '../../helpers';
 import TagSelectionMenu from '../tagSelectionMenu';
 import { ReactComponent as Icon } from '../../assets/delete.svg';
 
 import styles from './styles.module.css';
+
+// Each block is an object with 'id','tag' and 'content'
+// it only updates the database when a user add/delete a block
+// or set the block out of focus with tag/content being changed
 
 const EditableBlock = ({
   block: passedBlock,
@@ -25,15 +29,15 @@ const EditableBlock = ({
   });
 
   const defaultValue = useRef(block.content);
-
   const blockRef = useRef(null);
 
   const handleBlur = () => {
     if (
       passedBlock.content !== blockRef.current.innerHTML ||
       passedBlock.tag !== block.tag
-    )
-      updatePageData(block);
+    ) {
+      updatePageData({ ...block, content: blockRef.current.innerHTML });
+    }
   };
 
   const handleKeyDown = (e) => {
@@ -44,13 +48,13 @@ const EditableBlock = ({
     if (e.key === 'Enter') {
       if (prevKey !== 'Shift' && !tagSelectionMenuOpen) {
         e.preventDefault();
-        addNewBlock(block, blockRef.current);
+        addNewBlock({ ...block, content: blockRef.current.innerHTML });
         return;
       }
     }
 
     if (e.key === 'Backspace' && (!block.content || block.content === '<br>')) {
-      deleteBlock(block);
+      deleteBlock(block.id);
     }
   };
 
@@ -76,7 +80,7 @@ const EditableBlock = ({
   const handleTagSelection = (tag) => {
     setBlock({ ...block, tag });
     defaultValue.current = contentBackup;
-    setCaretToEnd(blockRef.current);
+    blockRef.current.focus();
     closeTagSelectionMenu();
   };
 
@@ -85,7 +89,7 @@ const EditableBlock = ({
   };
 
   const onIconClick = () => {
-    deleteBlock(block);
+    deleteBlock(block.id);
   };
 
   const renderBlock = (block) => {
@@ -99,7 +103,7 @@ const EditableBlock = ({
         }
       >
         <BlockTag
-          // "!lineNum" means index of the block is 0 therefore line number is 1
+          // "!lineNum" === true means index of the block is 0 therefore line number is 1
           placeholder={
             !lineNum ? 'Add a page title here..' : "Type '/' for commands"
           }

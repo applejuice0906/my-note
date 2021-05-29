@@ -82,6 +82,7 @@ h1.pageTitle {
   fill: rgb(55, 53, 47);
   display: none;
   z-index: 12;
+  cursor: pointer;
 }
 
 .dark .icon {
