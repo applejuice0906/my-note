@@ -22,7 +22,7 @@
   user-select: none;
 }
 
-.dark:hover {
+.dark .block:hover {
   background: rgb(44, 50, 58, 0.5);
   outline: rgb(51, 51, 51);
 }
@@ -37,7 +37,7 @@
   cursor: text;
 }
 
-.titlePlaceholder.dark[contentEditable='true']:empty:before {
+.dark .titlePlaceholder[contentEditable='true']:empty:before {
   content: attr(placeholder);
   color: rgba(247, 247, 247, 0.3);
   cursor: text;
@@ -49,7 +49,7 @@
   cursor: text;
 }
 
-.dark[contentEditable='true']:focus:empty:before {
+.dark [contentEditable='true']:focus:empty:before {
   content: attr(placeholder);
   color: rgba(247, 247, 247, 0.3);
   cursor: text;
@@ -64,4 +64,8 @@
   top: 30%;
   cursor: pointer;
   display: none;
+}
+
+.dark .icon {
+  fill: rgba(160, 159, 159, 0.726);
 }

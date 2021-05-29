@@ -1,7 +1,11 @@
+import { useContext } from 'react';
+import { ThemeContext } from '../../../context';
 import styles from './styles.module.css';
 import heartLiked from '../../../assets/heart-fill.svg';
 
-const Header = ({ dark }) => {
+const Header = () => {
+  const { dark } = useContext(ThemeContext);
+
   return (
     <header className={styles.header}>
       <div className={styles.headerContent}>

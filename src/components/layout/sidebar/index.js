@@ -1,8 +1,12 @@
+import { useContext } from 'react';
 import styles from './styles.module.css';
 import sun from '../../../assets/sunny.svg';
 import moon from '../../../assets/night.svg';
+import { ThemeContext } from '../../../context';
 
-const Sidebar = ({ dark, setDark }) => {
+const Sidebar = () => {
+  const { dark, setDark } = useContext(ThemeContext);
+
   const handleThemeSwitch = () => {
     // store the theme to local storage
     localStorage.setItem('dark', !dark);

@@ -57,6 +57,7 @@
 }
 
 .footer {
+  align-self: center;
   margin: auto 0 1.4rem;
   text-align: center;
 }

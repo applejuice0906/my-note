@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { ThemeContext } from '../../context';
 
 import styles from './styles.module.css';
 
@@ -27,6 +28,7 @@ const allowedTags = [
 ];
 
 const TagSelectionMenu = ({ position, closeMenu, handleSelection }) => {
+  const { dark } = useContext(ThemeContext);
   const [selectedTag, setSelectedTag] = useState(0);
 
   const isMenuOutsideOfViewport = position.y - MENU_HEIGHT < 0;
@@ -76,7 +78,9 @@ const TagSelectionMenu = ({ position, closeMenu, handleSelection }) => {
         justifyContent: !isMenuOutsideOfViewport ? 'flex-end' : 'flex-start',
       }}
     >
-      <div className={styles.menu}>
+      <div
+        className={dark ? [styles.menu, styles.dark].join(' ') : styles.menu}
+      >
         {allowedTags.map((tag, key) => {
           return (
             <div

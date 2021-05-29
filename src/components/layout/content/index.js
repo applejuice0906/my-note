@@ -2,10 +2,10 @@ import Header from '../header';
 import EditablePage from '../../editablePage';
 import styles from './styles.module.css';
 
-const Content = ({ dark }) => {
+const Content = () => {
   return (
     <section className={styles.content}>
-      <Header dark={dark} />
+      <Header />
       <EditablePage />
     </section>
   );

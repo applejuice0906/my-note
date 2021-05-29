@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState, useContext } from 'react';
+import { ThemeContext } from '../../context';
 import { setCaretToEnd, getCaretCoordinates } from '../../helpers';
 import TagSelectionMenu from '../tagSelectionMenu';
 import { ReactComponent as Icon } from '../../assets/delete.svg';
@@ -12,6 +13,8 @@ const EditableBlock = ({
   deleteBlock,
   lineNum,
 }) => {
+  const { dark } = useContext(ThemeContext);
+
   const [block, setBlock] = useState(passedBlock);
   const [contentBackup, setContentBackup] = useState('');
   const [prevKey, setPrevKey] = useState(null);
@@ -88,11 +91,17 @@ const EditableBlock = ({
   const renderBlock = (block) => {
     const BlockTag = block.tag;
     return (
-      <div className={styles.blockContainer}>
+      <div
+        className={
+          dark
+            ? [styles.blockContainer, styles.dark].join(' ')
+            : styles.blockContainer
+        }
+      >
         <BlockTag
           // "!lineNum" means index of the block is 0 therefore line number is 1
           placeholder={
-            !lineNum ? 'Type a page title...' : "Type '/' for commands"
+            !lineNum ? 'Add a page title here..' : "Type '/' for commands"
           }
           className={`${styles.block} ${
             !lineNum ? `pageTitle ${styles.titlePlaceholder}` : ''
@@ -107,6 +116,7 @@ const EditableBlock = ({
           onKeyUp={handleKeyUp}
           onBlur={handleBlur}
           dangerouslySetInnerHTML={{ __html: defaultValue.current }}
+          data-position={lineNum + 1}
         ></BlockTag>
         {!lineNum ? null : (
           <Icon className={styles.icon} onClick={onIconClick} />
