@@ -7,9 +7,33 @@
   align-items: center;
   overflow: auto;
   overflow-x: hidden;
+  position: relative;
 }
 
 .content {
   width: 100%;
   max-width: 73rem;
+}
+
+.notice {
+  text-align: center;
+}
+
+.icon {
+  height: 4rem;
+  width: 4rem;
+  animation: rotation 2s infinite;
+  position: absolute;
+  top: 25%;
+  left: 30%;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }

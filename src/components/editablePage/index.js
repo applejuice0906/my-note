@@ -1,30 +1,37 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { PagesContext, SelectedPageContext } from '../../context';
 import { calcUniqueID } from '../../helpers';
 import EditableBlock from '../editableBlock';
 
 import styles from './styles.module.css';
+import { ReactComponent as IconLoading } from '../../assets/loader.svg';
 
 // Each page contains an array of blocks/block
 
 const EditablePage = () => {
-  // When a new page is added, it sets a initial block for the page
-  const initialBlock = { id: calcUniqueID(), content: '', tag: 'h1' };
+  const { pages } = useContext(PagesContext);
+  const { selectedPage } = useContext(SelectedPageContext);
 
-  const [blocks, setBlocks] = useState([initialBlock]);
+  // When a new page is added, it sets a initial block for the page
+  // initialBlock = { id: calcUniqueID(), content: '', tag: 'h1' };
+
+  const [blocks, setBlocks] = useState(null);
   const [currentBlockId, setCurrentBlockId] = useState(null);
 
   useEffect(() => {
-    // Update the document in FireStore Database
-  }, [blocks]);
+    setBlocks(selectedPage?.blocks);
+  }, [selectedPage]);
+
+  useEffect(() => {}, [blocks]);
 
   useEffect(() => {
     // get the next block position by calculating the current block position(index + 1) + 1
     const nextBlockPosition =
-      blocks.map((block) => block.id).indexOf(currentBlockId) + 2;
+      blocks?.map((block) => block.id).indexOf(currentBlockId) + 2;
     const nextBlock = document.querySelector(
       `[data-position='${nextBlockPosition}']`
     );
-    if (nextBlock) nextBlock.focus();
+    if (currentBlockId && nextBlock) nextBlock.focus();
   }, [currentBlockId, blocks]);
 
   const updatePageData = (currentBlock) => {
@@ -60,22 +67,44 @@ const EditablePage = () => {
     setBlocks(newBlocks);
   };
 
+  const renderContent = () => {
+    if (!pages)
+      return (
+        <div>
+          <IconLoading className={styles.icon} />
+        </div>
+      );
+
+    if (!selectedPage)
+      return (
+        <div className={styles.notice}>
+          <h2>
+            No pages available...🙁
+            <br />
+            You can create a new page in the sidebar📒
+          </h2>
+        </div>
+      );
+
+    if (blocks) {
+      return blocks.map((block, index) => {
+        return (
+          <EditableBlock
+            key={block.id}
+            block={block}
+            updatePageData={updatePageData}
+            addNewBlock={addNewBlock}
+            deleteBlock={deleteBlock}
+            lineNum={index}
+          />
+        );
+      });
+    }
+  };
+
   return (
     <div className={styles.container}>
-      <div className={styles.content}>
-        {blocks.map((block, index) => {
-          return (
-            <EditableBlock
-              key={block.id}
-              block={block}
-              updatePageData={updatePageData}
-              addNewBlock={addNewBlock}
-              deleteBlock={deleteBlock}
-              lineNum={index}
-            />
-          );
-        })}
-      </div>
+      <div className={styles.content}>{renderContent()}</div>
     </div>
   );
 };

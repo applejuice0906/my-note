@@ -1,5 +1,5 @@
 import { useEffect, useState, useMemo } from 'react';
-import { ThemeContext } from './context';
+import { ThemeContext, PagesProvider, SelectedPageProvider } from './context';
 
 import Content from './components/layout/content';
 import Sidebar from './components/layout/sidebar';
@@ -24,17 +24,21 @@ function App() {
   );
 
   return (
-    <ThemeContext.Provider value={themeValue}>
-      <main className={dark ? 'dark' : ''}>
-        {!sidebarOpen ? (
-          <Icon className="icon" onClick={() => setSidebarOpen(true)} />
-        ) : null}
-        <div className="container">
-          <Sidebar sidebarState={{ sidebarOpen, setSidebarOpen }} />
-          <Content />
-        </div>
-      </main>
-    </ThemeContext.Provider>
+    <PagesProvider>
+      <SelectedPageProvider>
+        <ThemeContext.Provider value={themeValue}>
+          <main className={dark ? 'dark' : ''}>
+            {!sidebarOpen ? (
+              <Icon className="icon" onClick={() => setSidebarOpen(true)} />
+            ) : null}
+            <div className="container">
+              <Sidebar sidebarState={{ sidebarOpen, setSidebarOpen }} />
+              <Content />
+            </div>
+          </main>
+        </ThemeContext.Provider>
+      </SelectedPageProvider>
+    </PagesProvider>
   );
 }
 

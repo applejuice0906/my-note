@@ -1,10 +1,18 @@
 import { useContext, useEffect, useRef } from 'react';
+import AddPage from '../../addPage';
+
 import styles from './styles.module.css';
 import sun from '../../../assets/sunny.svg';
 import moon from '../../../assets/night.svg';
-import { ThemeContext } from '../../../context';
+import {
+  PagesContext,
+  SelectedPageContext,
+  ThemeContext,
+} from '../../../context';
 
 const Sidebar = ({ sidebarState }) => {
+  const { pages } = useContext(PagesContext);
+  const { selectedPage, setSelectedPage } = useContext(SelectedPageContext);
   const { dark, setDark } = useContext(ThemeContext);
   const { sidebarOpen, setSidebarOpen } = sidebarState;
 
@@ -28,6 +36,8 @@ const Sidebar = ({ sidebarState }) => {
     setDark(!dark);
   };
 
+  const handleSelectPage = () => {};
+
   return (
     <div
       className={
@@ -44,6 +54,29 @@ const Sidebar = ({ sidebarState }) => {
           <span className={styles.button}></span>
           <img src={sun} alt="sunny icon" className={styles.icon} />
           <img src={moon} alt="night icon" className={styles.icon} />
+        </div>
+        <div className={styles.itemContainer}>
+          <ul>
+            {pages?.length && selectedPage
+              ? pages.map((page) => {
+                  return (
+                    <li
+                      onClick={handleSelectPage}
+                      key={page.pageId}
+                      data-pageid={page.docId}
+                      className={
+                        selectedPage.pageId === page.pageId
+                          ? [styles.active, styles.item].join(' ')
+                          : styles.item
+                      }
+                    >
+                      {page.blocks[0].content}
+                    </li>
+                  );
+                })
+              : null}
+          </ul>
+          <AddPage />
         </div>
         <footer className={styles.footer}>
           <p className={styles.copyright}>Copyright &copy; 2021 Note App</p>

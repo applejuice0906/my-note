@@ -18,6 +18,7 @@
 
   .container.active .sidebar {
     width: 75vw;
+    text-align: center;
   }
 }
 
@@ -71,6 +72,36 @@
 .icon {
   display: block;
   width: 3rem;
+}
+
+.itemContainer {
+  margin-top: 5rem;
+  /* text-align: center; */
+}
+
+.item {
+  width: 100%;
+  padding: 0.35rem 2rem;
+  cursor: pointer;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.item:hover {
+  background: rgba(185, 183, 183, 0.329);
+}
+
+.dark .item:hover {
+  background: rgba(24, 26, 29, 0.425);
+}
+
+.item.active {
+  background: rgba(185, 183, 183, 0.329);
+}
+
+.dark .item.active {
+  background: rgba(24, 26, 29, 0.425);
 }
 
 .footer {
