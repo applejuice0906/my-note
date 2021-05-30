@@ -12,7 +12,7 @@ import styles from './styles.module.css';
 
 const EditableBlock = ({
   block: passedBlock,
-  updatePageData,
+  updateBlock,
   addNewBlock,
   deleteBlock,
   lineNum,
@@ -36,7 +36,7 @@ const EditableBlock = ({
       passedBlock.content !== blockRef.current.innerHTML ||
       passedBlock.tag !== block.tag
     ) {
-      updatePageData({ ...block, content: blockRef.current.innerHTML });
+      updateBlock({ ...block, content: blockRef.current.innerHTML });
     }
   };
 

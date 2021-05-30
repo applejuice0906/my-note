@@ -18,6 +18,8 @@ const Sidebar = ({ sidebarState }) => {
 
   const sidebarRef = useRef(null);
 
+  useEffect(() => {}, [pages]);
+
   useEffect(() => {
     if (sidebarOpen) {
       const listener = (e) => {
@@ -35,8 +37,6 @@ const Sidebar = ({ sidebarState }) => {
     localStorage.setItem('dark', !dark);
     setDark(!dark);
   };
-
-  const handleSelectPage = () => {};
 
   return (
     <div
@@ -61,7 +61,7 @@ const Sidebar = ({ sidebarState }) => {
               ? pages.map((page) => {
                   return (
                     <li
-                      onClick={handleSelectPage}
+                      onClick={() => setSelectedPage(page)}
                       key={page.pageId}
                       data-pageid={page.docId}
                       className={
@@ -70,7 +70,7 @@ const Sidebar = ({ sidebarState }) => {
                           : styles.item
                       }
                     >
-                      {page.blocks[0].content}
+                      {page.blocks[0].content || '📄untitled'}
                     </li>
                   );
                 })

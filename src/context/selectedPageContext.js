@@ -12,7 +12,7 @@ export const SelectedPageProvider = ({ children }) => {
   // from the database
   // pages could be null, empty array, or array with data
   useEffect(() => {
-    // if (selectedPage) return;
+    if (selectedPage) return;
     setSelectedPage(pages && pages.length > 0 && pages[0]);
   }, [pages, selectedPage]);
 
