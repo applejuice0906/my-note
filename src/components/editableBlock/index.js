@@ -53,9 +53,9 @@ const EditableBlock = ({
       }
     }
 
-    if (e.key === 'Backspace' && (!block.content || block.content === '<br>')) {
-      deleteBlock(block.id);
-    }
+    // if (e.key === 'Backspace' && (!block.content || block.content === '<br>')) {
+    //   deleteBlock(block.id);
+    // }
   };
 
   const handleKeyUp = (e) => {

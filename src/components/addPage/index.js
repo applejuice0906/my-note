@@ -10,15 +10,19 @@ const AddPage = () => {
   const { setSelectedPage } = useContext(SelectedPageContext);
 
   const addPage = async () => {
-    const newPage = {
-      blocks: [{ id: calcUniqueID(), content: '', tag: 'h1' }],
-      pageId: calcUniqueID(),
-      createdAt: timestamp(),
-      isFavorite: false,
-    };
+    try {
+      const newPage = {
+        blocks: [{ id: calcUniqueID(), content: '', tag: 'h1' }],
+        pageId: calcUniqueID(),
+        createdAt: timestamp(),
+        isFavorite: false,
+      };
 
-    await firestore.collection('pages').add(newPage);
-    setSelectedPage(newPage);
+      await firestore.collection('pages').add(newPage);
+      setSelectedPage(newPage);
+    } catch (error) {
+      console.dir(error);
+    }
   };
   return (
     <div

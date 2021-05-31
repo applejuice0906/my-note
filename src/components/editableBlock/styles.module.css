@@ -9,8 +9,8 @@
 .block {
   padding: 0.45rem;
   padding-right: 2rem;
-  -webkit-user-select: text;
   user-select: text;
+  -webkit-user-select: text;
   outline: none;
   border-radius: 3px;
   word-wrap: break-word;
@@ -19,7 +19,6 @@
 .block:hover {
   background: #fafafa;
   outline: #f5f6fb;
-  user-select: none;
 }
 
 .dark .block:hover {
@@ -31,28 +30,25 @@
   display: block;
 }
 
-.titlePlaceholder[contentEditable='true']:empty:before {
+[contentEditable='true']
+  .titlePlaceholder[contentEditable='true']:empty:before {
   content: attr(placeholder);
   color: rgba(72, 72, 72, 0.25);
-  cursor: text;
 }
 
 .dark .titlePlaceholder[contentEditable='true']:empty:before {
   content: attr(placeholder);
   color: rgba(247, 247, 247, 0.3);
-  cursor: text;
 }
 
 [contentEditable='true']:focus:empty:before {
   content: attr(placeholder);
   color: rgba(72, 72, 72, 0.25);
-  cursor: text;
 }
 
 .dark [contentEditable='true']:focus:empty:before {
   content: attr(placeholder);
   color: rgba(247, 247, 247, 0.3);
-  cursor: text;
 }
 
 .icon {

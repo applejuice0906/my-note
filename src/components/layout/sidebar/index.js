@@ -1,4 +1,5 @@
-import { useContext, useEffect, useRef } from 'react';
+import { useContext, useRef } from 'react';
+import { useClickOutside } from '../../../hooks';
 import AddPage from '../../addPage';
 
 import styles from './styles.module.css';
@@ -18,19 +19,7 @@ const Sidebar = ({ sidebarState }) => {
 
   const sidebarRef = useRef(null);
 
-  useEffect(() => {}, [pages]);
-
-  useEffect(() => {
-    if (sidebarOpen) {
-      const listener = (e) => {
-        if (sidebarRef.current.contains(e.target)) return;
-        setSidebarOpen(false);
-      };
-
-      document.addEventListener('click', listener);
-      return () => document.removeEventListener('click', listener);
-    }
-  }, [sidebarOpen, setSidebarOpen]);
+  useClickOutside(sidebarRef, sidebarOpen, setSidebarOpen);
 
   const handleThemeSwitch = () => {
     // store the theme to local storage
@@ -61,7 +50,10 @@ const Sidebar = ({ sidebarState }) => {
               ? pages.map((page) => {
                   return (
                     <li
-                      onClick={() => setSelectedPage(page)}
+                      onClick={() => {
+                        setSelectedPage(page);
+                        setSidebarOpen(false);
+                      }}
                       key={page.pageId}
                       data-pageid={page.docId}
                       className={
@@ -70,7 +62,7 @@ const Sidebar = ({ sidebarState }) => {
                           : styles.item
                       }
                     >
-                      {page.blocks[0].content || '📄untitled'}
+                      {page.blocks[0].content || '📄Untitled'}
                     </li>
                   );
                 })
@@ -79,7 +71,7 @@ const Sidebar = ({ sidebarState }) => {
           <AddPage />
         </div>
         <footer className={styles.footer}>
-          <p className={styles.copyright}>Copyright &copy; 2021 Note App</p>
+          <p className={styles.copyright}>Copyright &copy; 2021 My Note</p>
         </footer>
       </div>
     </div>

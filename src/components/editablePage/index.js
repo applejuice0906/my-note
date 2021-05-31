@@ -35,52 +35,71 @@ const EditablePage = () => {
   }, [currentBlockId, blocks]);
 
   const updateDatabase = async (newBlocks) => {
-    let docId;
-    pages.forEach((page) => {
-      if (page.pageId === selectedPage.pageId) docId = page.docId;
-    });
-    await firestore
-      .collection('pages')
-      .doc(docId)
-      .update({ ...selectedPage, blocks: newBlocks });
+    try {
+      let docId;
+      if (!selectedPage.docId) {
+        pages.forEach((page) => {
+          if (page.pageId === selectedPage.pageId) docId = page.docId;
+        });
+      }
+
+      await firestore
+        .collection('pages')
+        .doc(selectedPage.docId || docId)
+        .update({ ...selectedPage, blocks: newBlocks });
+    } catch (error) {
+      throw error;
+    }
   };
 
   const updateBlock = async (currentBlock) => {
-    setCurrentBlockId(currentBlock.id);
-    const newBlocks = blocks.map((block) => {
-      if (block.id === currentBlock.id) return currentBlock;
-      return block;
-    });
-    await updateDatabase(newBlocks);
-    setBlocks(newBlocks);
+    try {
+      setCurrentBlockId(currentBlock.id);
+      const newBlocks = blocks.map((block) => {
+        if (block.id === currentBlock.id) return currentBlock;
+        return block;
+      });
+      await updateDatabase(newBlocks);
+      setBlocks(newBlocks);
+    } catch (error) {
+      console.dir(error);
+    }
   };
 
   const addNewBlock = async (currentBlock) => {
-    setCurrentBlockId(currentBlock.id);
-    const newBlock = { id: calcUniqueID(), content: '', tag: 'p' };
-    const currentIndex = blocks
-      .map((block) => block.id)
-      .indexOf(currentBlock.id);
+    try {
+      setCurrentBlockId(currentBlock.id);
+      const newBlock = { id: calcUniqueID(), content: '', tag: 'p' };
+      const currentIndex = blocks
+        .map((block) => block.id)
+        .indexOf(currentBlock.id);
 
-    // Update the current blocks
-    const newBlocks = blocks.map((block) => {
-      if (block.id === currentBlock.id) return currentBlock;
-      return block;
-    });
+      // Update the current blocks
+      const newBlocks = blocks.map((block) => {
+        if (block.id === currentBlock.id) return currentBlock;
+        return block;
+      });
 
-    // Insert a new block right after the current block
-    newBlocks.splice(currentIndex + 1, 0, newBlock);
+      // Insert a new block right after the current block
+      newBlocks.splice(currentIndex + 1, 0, newBlock);
 
-    await updateDatabase(newBlocks);
+      await updateDatabase(newBlocks);
 
-    setBlocks(newBlocks);
+      setBlocks(newBlocks);
+    } catch (error) {
+      console.dir(error);
+    }
   };
 
   const deleteBlock = async (currentBlockId) => {
-    if (blocks.length === 1) return;
-    const newBlocks = blocks.filter((block) => block.id !== currentBlockId);
-    await updateDatabase(newBlocks);
-    setBlocks(newBlocks);
+    try {
+      if (blocks.length === 1) return;
+      const newBlocks = blocks.filter((block) => block.id !== currentBlockId);
+      await updateDatabase(newBlocks);
+      setBlocks(newBlocks);
+    } catch (error) {
+      console.dir(error);
+    }
   };
 
   const renderContent = () => {
