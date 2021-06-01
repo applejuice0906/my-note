@@ -1,4 +1,5 @@
 import { ThemeContext } from './ThemeContext';
+import { UserContext } from './UserContext';
 import { PagesContext, PagesProvider } from './PagesContext';
 import {
   SelectedPageContext,
@@ -7,6 +8,7 @@ import {
 
 export {
   ThemeContext,
+  UserContext,
   PagesContext,
   PagesProvider,
   SelectedPageContext,

@@ -8,7 +8,7 @@ const allowedTags = [
   {
     id: 'main-heading',
     tag: 'h1',
-    label: 'Page Title',
+    label: 'Top heading',
   },
   {
     id: 'heading',
@@ -74,7 +74,7 @@ const TagSelectionMenu = ({ position, closeMenu, handleSelection }) => {
       className={styles.menuWrapper}
       style={{
         top: y,
-        left: x / 2 - 60,
+        left: x / 2 - 10,
         justifyContent: !isMenuOutsideOfViewport ? 'flex-end' : 'flex-start',
       }}
     >

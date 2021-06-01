@@ -21,6 +21,7 @@ const Header = () => {
   useClickOutside(deleteMessageRef, showMessage, setShowMessage);
 
   const handleDeletePage = () => {
+    setShowMessage(false);
     let docId;
     if (!selectedPage.docId) {
       pages.forEach((page) => {
@@ -34,7 +35,6 @@ const Header = () => {
       .delete()
       .then(() => {
         setSelectedPage(null);
-        setShowMessage(false);
       });
   };
 

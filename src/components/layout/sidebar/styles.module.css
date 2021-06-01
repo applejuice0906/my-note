@@ -12,6 +12,10 @@
     transition: all 0.4s;
   }
 
+  .sidebar {
+    font-size: 1.8rem;
+  }
+
   .container.active {
     left: 0;
   }

@@ -1,14 +1,16 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
+import 'firebase/auth';
 
 firebase.initializeApp({
-  apiKey: 'AIzaSyDivJ74OTC_r5xBV8Q62ELc2Y5hcylVBxk',
-  authDomain: 'note-app-eeec4.firebaseapp.com',
-  projectId: 'note-app-eeec4',
-  storageBucket: 'note-app-eeec4.appspot.com',
-  messagingSenderId: '664178330105',
-  appId: '1:664178330105:web:9339b499bfd4a78ab0d528',
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
 });
 
 export const timestamp = firebase.firestore.FieldValue.serverTimestamp;
 export const firestore = firebase.firestore();
+export const auth = firebase.auth();

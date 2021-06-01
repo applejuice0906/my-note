@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
-import { PagesContext, SelectedPageContext } from '../../context';
+import { PagesContext, SelectedPageContext, UserContext } from '../../context';
 import { calcUniqueID } from '../../helpers';
 import EditableBlock from '../editableBlock';
 import { firestore } from '../../firebase';
@@ -10,6 +10,7 @@ import { ReactComponent as IconLoading } from '../../assets/loader.svg';
 // Each page contains an array of blocks/block
 
 const EditablePage = () => {
+  const { user } = useContext(UserContext);
   const { pages } = useContext(PagesContext);
   const { selectedPage } = useContext(SelectedPageContext);
 
@@ -18,6 +19,7 @@ const EditablePage = () => {
 
   const [blocks, setBlocks] = useState(null);
   const [currentBlockId, setCurrentBlockId] = useState(null);
+  const isAuthor = user?.uid === selectedPage?.uid;
 
   useEffect(() => {
     setBlocks(selectedPage?.blocks);
@@ -131,6 +133,7 @@ const EditablePage = () => {
             addNewBlock={addNewBlock}
             deleteBlock={deleteBlock}
             lineNum={index}
+            isAuthor={isAuthor}
           />
         );
       });

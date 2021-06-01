@@ -68,7 +68,7 @@ const Sidebar = ({ sidebarState }) => {
                 })
               : null}
           </ul>
-          <AddPage />
+          <AddPage setSidebarOpen={setSidebarOpen} />
         </div>
         <footer className={styles.footer}>
           <p className={styles.copyright}>Copyright &copy; 2021 My Note</p>

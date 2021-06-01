@@ -16,6 +16,7 @@ const EditableBlock = ({
   addNewBlock,
   deleteBlock,
   lineNum,
+  isAuthor,
 }) => {
   const { dark } = useContext(ThemeContext);
 
@@ -53,9 +54,9 @@ const EditableBlock = ({
       }
     }
 
-    // if (e.key === 'Backspace' && (!block.content || block.content === '<br>')) {
-    //   deleteBlock(block.id);
-    // }
+    if (e.key === 'Backspace' && block.content === '<br>') {
+      blockRef.current.innerHTML = '';
+    }
   };
 
   const handleKeyUp = (e) => {
@@ -92,7 +93,7 @@ const EditableBlock = ({
     deleteBlock(block.id);
   };
 
-  const renderBlock = (block) => {
+  const renderEditableBlock = (block) => {
     const BlockTag = block.tag;
     return (
       <div
@@ -110,7 +111,7 @@ const EditableBlock = ({
           className={`${styles.block} ${
             !lineNum ? `pageTitle ${styles.titlePlaceholder}` : ''
           }`}
-          contentEditable="true"
+          contentEditable={isAuthor}
           suppressContentEditableWarning={true}
           ref={blockRef}
           onInput={(e) => {
@@ -145,7 +146,7 @@ const EditableBlock = ({
         />
       )}
 
-      {renderBlock(block)}
+      {renderEditableBlock(block)}
     </>
   );
 };

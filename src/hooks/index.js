@@ -1,10 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { firestore } from '../firebase';
+import { UserContext } from '../context';
 
 export const useFirestore = (collection) => {
+  const { user } = useContext(UserContext);
   const [pages, setPages] = useState(null);
 
   useEffect(() => {
+    if (!user) return;
     const unsub = firestore
       .collection(collection)
       .orderBy('createdAt', 'asc')
@@ -16,7 +19,7 @@ export const useFirestore = (collection) => {
         setPages(docs);
       });
     return () => unsub();
-  }, [collection]);
+  }, [user, collection]);
 
   return { pages, setPages };
 };

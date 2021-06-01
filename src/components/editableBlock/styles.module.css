@@ -30,25 +30,28 @@
   display: block;
 }
 
-[contentEditable='true']
-  .titlePlaceholder[contentEditable='true']:empty:before {
+.titlePlaceholder[contentEditable='true']:empty:before {
   content: attr(placeholder);
   color: rgba(72, 72, 72, 0.25);
+  cursor: text;
 }
 
 .dark .titlePlaceholder[contentEditable='true']:empty:before {
   content: attr(placeholder);
   color: rgba(247, 247, 247, 0.3);
+  cursor: text;
 }
 
 [contentEditable='true']:focus:empty:before {
   content: attr(placeholder);
   color: rgba(72, 72, 72, 0.25);
+  cursor: text;
 }
 
 .dark [contentEditable='true']:focus:empty:before {
   content: attr(placeholder);
   color: rgba(247, 247, 247, 0.3);
+  cursor: text;
 }
 
 .icon {
