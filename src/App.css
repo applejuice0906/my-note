@@ -6,6 +6,7 @@
   margin: 0;
   padding: 0;
   box-sizing: inherit;
+  touch-action: inherit;
 }
 
 ul {
@@ -15,6 +16,7 @@ ul {
 html {
   font-size: 62.5%;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 @media only screen and (max-width: 750px) {

@@ -73,8 +73,8 @@ const TagSelectionMenu = ({ position, closeMenu, handleSelection }) => {
     <div
       className={styles.menuWrapper}
       style={{
-        top: y,
-        left: x / 2 - 10,
+        top: y + 60,
+        left: x / 2 + 30,
         justifyContent: !isMenuOutsideOfViewport ? 'flex-end' : 'flex-start',
       }}
     >

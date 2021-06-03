@@ -5,6 +5,7 @@ import AddPage from '../../addPage';
 import styles from './styles.module.css';
 import sun from '../../../assets/sunny.svg';
 import moon from '../../../assets/night.svg';
+import github from '../../../assets/github.svg';
 import {
   PagesContext,
   SelectedPageContext,
@@ -71,6 +72,14 @@ const Sidebar = ({ sidebarState }) => {
           <AddPage setSidebarOpen={setSidebarOpen} />
         </div>
         <footer className={styles.footer}>
+          <a
+            className={styles.footerLink}
+            href="https://github.com/applejuice0906/my-note"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <img src={github} alt="github icon" className={styles.footerIcon} />
+          </a>
           <p className={styles.copyright}>Copyright &copy; 2021 My Note</p>
         </footer>
       </div>

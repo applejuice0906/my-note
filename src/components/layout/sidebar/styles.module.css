@@ -2,7 +2,6 @@
   height: 100%;
   position: relative;
   z-index: 99;
-  overflow: auto;
 }
 
 @media only screen and (max-width: 880px) {
@@ -113,9 +112,22 @@
 .footer {
   align-self: center;
   margin: auto 0 1.4rem;
-  text-align: center;
+  padding-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+
+.footerLink {
+  align-self: center;
+}
+
+.footerIcon {
+  display: block;
+  width: 2.35rem;
 }
 
 .copyright {
+  margin-top: 1rem;
   font-size: 1.05rem;
 }
