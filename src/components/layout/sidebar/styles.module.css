@@ -34,7 +34,6 @@
   display: flex;
   flex-direction: column;
   padding-top: 3rem;
-  overflow: auto;
 }
 
 .dark {
@@ -79,7 +78,7 @@
 
 .itemContainer {
   margin-top: 5rem;
-  /* text-align: center; */
+  overflow: auto;
 }
 
 .item {

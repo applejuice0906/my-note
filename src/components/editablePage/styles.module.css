@@ -6,8 +6,9 @@
   flex-direction: column;
   align-items: center;
   overflow: auto;
-  overflow-x: hidden;
-  position: relative;
+  transform: translate3d(0px, 0px, 0px);
+  will-change: scroll-position, transform;
+  /* overflow-x: hidden; */
 }
 
 .content {

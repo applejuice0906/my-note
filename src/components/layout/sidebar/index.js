@@ -45,7 +45,7 @@ const Sidebar = ({ sidebarState }) => {
           <img src={sun} alt="sunny icon" className={styles.icon} />
           <img src={moon} alt="night icon" className={styles.icon} />
         </div>
-        <div className={styles.itemContainer}>
+        <nav className={styles.itemContainer}>
           <ul>
             {pages?.length && selectedPage
               ? pages.map((page) => {
@@ -69,8 +69,8 @@ const Sidebar = ({ sidebarState }) => {
                 })
               : null}
           </ul>
-          <AddPage setSidebarOpen={setSidebarOpen} />
-        </div>
+        </nav>
+        <AddPage setSidebarOpen={setSidebarOpen} />
         <footer className={styles.footer}>
           <a
             className={styles.footerLink}

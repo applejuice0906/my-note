@@ -141,7 +141,7 @@ const EditablePage = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <div id="editablePage" className={styles.container}>
       <div className={styles.content}>{renderContent()}</div>
     </div>
   );

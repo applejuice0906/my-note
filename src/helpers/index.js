@@ -19,8 +19,10 @@ export const getCaretCoordinates = (fromStart = true) => {
     if (selection.rangeCount !== 0) {
       const range = selection.getRangeAt(0).cloneRange();
       range.collapse(fromStart);
+      // const scrollY = document.getElementById('editablePage').scrollTop;
       const rect = range.getClientRects()[0];
       if (rect) {
+        console.log(rect.left, rect.top);
         return { x: rect.left, y: rect.top };
       }
     }
