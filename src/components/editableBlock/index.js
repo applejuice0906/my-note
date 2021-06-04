@@ -47,8 +47,14 @@ const EditableBlock = ({
     if (e.key === '/') setContentBackup(block.content);
 
     if (e.key === 'Enter') {
-      if (prevKey !== 'Shift' && !tagSelectionMenuOpen) {
-        e.preventDefault();
+      // 'Shift' + 'Enter' => moving to next line in the same block
+      if (prevKey === 'Shift') return;
+
+      e.preventDefault();
+      // 'Enter' + 'Enter' => moving on to the next block
+      // We need to hit Enter twice to deal with the Japanese IME
+      // You can still do 'Shift' + 'Enter' whenever you don't want to move to the next block
+      if (prevKey === 'Enter' && !tagSelectionMenuOpen) {
         addNewBlock({ ...block, content: blockRef.current.innerHTML });
         return;
       }
