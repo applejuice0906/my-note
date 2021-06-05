@@ -22,7 +22,6 @@ export const getCaretCoordinates = (fromStart = true) => {
       // const scrollY = document.getElementById('editablePage').scrollTop;
       const rect = range.getClientRects()[0];
       if (rect) {
-        console.log(rect.left, rect.top);
         return { x: rect.left, y: rect.top };
       }
     }
