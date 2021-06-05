@@ -7,6 +7,7 @@
 }
 
 .block {
+  min-height: 25px;
   padding: 0.45rem;
   padding-right: 2rem;
   user-select: text;
